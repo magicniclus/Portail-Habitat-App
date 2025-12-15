@@ -1,9 +1,37 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Animated } from 'react-native';
 
-const LeadCard = ({ lead, onViewPress, formatDate, formatTime }) => {
+const LeadCard = ({ lead, onViewPress, formatDate, formatTime, index = 0 }) => {
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const slideAnim = useRef(new Animated.Value(50)).current;
+
+  useEffect(() => {
+    Animated.parallel([
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 400,
+        delay: index * 100,
+        useNativeDriver: true,
+      }),
+      Animated.timing(slideAnim, {
+        toValue: 0,
+        duration: 400,
+        delay: index * 100,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  }, [fadeAnim, slideAnim, index]);
+
   return (
-    <View style={styles.leadCard}>
+    <Animated.View 
+      style={[
+        styles.leadCard,
+        {
+          opacity: fadeAnim,
+          transform: [{ translateY: slideAnim }],
+        },
+      ]}
+    >
       <View style={styles.leadInfo}>
         <Text style={styles.leadClient}>{lead.clientName}</Text>
         <Text style={styles.leadSector}>{lead.sector}</Text>
@@ -19,7 +47,7 @@ const LeadCard = ({ lead, onViewPress, formatDate, formatTime }) => {
       >
         <Text style={styles.viewButtonText}>Voir</Text>
       </TouchableOpacity>
-    </View>
+    </Animated.View>
   );
 };
 

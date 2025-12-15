@@ -10,6 +10,7 @@ import ContactBottomNavigation from './components/ContactBottomNavigation';
 import Header from './components/Header';
 import LeadCard from './components/LeadCard';
 import ContactDetail from './components/ContactDetail';
+import NavigationMenu from './components/NavigationMenu';
 
 export default function App() {
   const [email, setEmail] = useState('');
@@ -571,6 +572,7 @@ export default function App() {
                       onViewPress={handleViewContact}
                       formatDate={formatDate}
                       formatTime={formatTime}
+                      index={index}
                     />
                   ))
                 ) : (
@@ -587,6 +589,7 @@ export default function App() {
                       onViewPress={handleViewContact}
                       formatDate={formatDate}
                       formatTime={formatTime}
+                      index={index}
                     />
                   ))
                 ) : (
@@ -600,6 +603,13 @@ export default function App() {
         </ScrollView>
         
         <BottomNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
+        
+        <NavigationMenu 
+          showNavigation={showNavigation}
+          onClose={handleCloseNavigation}
+          onLogout={handleLogout}
+          onSettings={handleOpenSettings}
+        />
         
         <StatusBar style="auto" />
       </View>
