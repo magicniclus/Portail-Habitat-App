@@ -388,7 +388,11 @@ export default function App() {
   };
 
   const handleBecomeArtisan = () => {
-    Linking.openURL('https://www.portail-habitat.fr/devenir-pro');
+    Linking.openURL('https://portailhabitat.fr/devenir-artisan');
+  };
+
+  const handlePrivacyPolicy = () => {
+    Linking.openURL('https://portailhabitat.fr/politique-de-confidentialite');
   };
 
   const handleCallClient = (phoneNumber) => {
@@ -523,6 +527,14 @@ export default function App() {
               
               <TouchableOpacity style={styles.settingsButton}>
                 <Text style={styles.settingsButtonText}>Changer le mot de passe</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.settingsSection}>
+              <Text style={styles.settingsSectionTitle}>Informations légales</Text>
+              
+              <TouchableOpacity style={styles.settingsButton} onPress={handlePrivacyPolicy}>
+                <Text style={styles.settingsButtonText}>Politique de confidentialité</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -673,6 +685,10 @@ export default function App() {
         <TouchableOpacity style={styles.artisanButton} onPress={handleBecomeArtisan}>
           <Text style={styles.artisanButtonText}>Pas encore artisan ?</Text>
         </TouchableOpacity>
+
+        <TouchableOpacity onPress={handlePrivacyPolicy}>
+          <Text style={styles.privacyPolicyText}>Politique de confidentialité</Text>
+        </TouchableOpacity>
       </View>
 
       <StatusBar style="auto" />
@@ -749,6 +765,13 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  privacyPolicyText: {
+    color: '#2E86AB',
+    textAlign: 'center',
+    marginTop: 15,
+    fontSize: 14,
+    textDecorationLine: 'underline',
   },
   loadingContainer: {
     flex: 1,
